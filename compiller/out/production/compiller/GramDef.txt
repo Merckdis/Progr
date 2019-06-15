@@ -1,0 +1,43 @@
+lang -> expr+
+expr -> init | if | loopwhile | WR
+
+init -> VAR ASSIGN_OP stmt SEMICOLON
+stmt -> value(OP value)*
+value -> VAR | digit | brcktexpr
+brcktexpr -> BRACKET_OPEN stmt BRACKET_CLOSE
+WR -> write | read
+
+write -> WRITE_KW brcktexpr SEMICOLON
+read -> READ_KW BRACKET_OPEN VAR FBRACKET_CLOSE SEMICOLON
+
+loopwhile -> WHILE_KW BRACKET_OPEN comp BRACKET_CLOSE FBRACKET_OPEN expr* FBRACKET_CLOSE
+if_stmt -> IF_KW BRACKET_OPEN comp BRACKET_CLOSE FBRACKET_OPEN expr* FBRACKET_CLOSE
+comp -> stmt COMPARE_OP stmt
+
+IF_KW -> "if"
+WHILE_KW -> "while"
+READ_KW -> "read"
+WRITE_KW -> "write"
+VAR -> [a-zA-Z_][a-zA-Z0-9_]*
+OP -> "+" | "-" | "/" | "*"
+
+ASSIGN_OP -> "="
+COMPARE_OP -> "!=" | ">" | "<" | ">=" | "<=" | "=="
+
+digit -> INT | FLOAT
+INT -> -?[0-9]+*
+FLOAT -> -?[0-9].[0-9]+
+
+BRACKET_OPEN -> "("
+BRACKET_CLOSE -> ")"
+FBRACKET_OPEN -> "{"
+FBRACET_CLOSE -> "}"
+
+SEMICOLON -> ";"
+
+
+
+
+
+
+
